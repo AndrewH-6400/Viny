@@ -33,6 +33,30 @@ function Display() {
             Artist: "AJJ",
             Art: "https://upload.wikimedia.org/wikipedia/en/e/e9/AJJ_People_That_Can_Eat_People.jpg",
         },
+        {
+            ID: 5,
+            Title: "Ants from Up There",
+            Artist: "Black Country New Road",
+            Art: "https://upload.wikimedia.org/wikipedia/en/d/d7/Ants_from_Up_There_-_Black_Country%2C_New_Road.jpg",
+        },
+        {
+            ID: 6,
+            Title: "Laurel Hell",
+            Artist: "Mitski",
+            Art: "https://upload.wikimedia.org/wikipedia/en/a/a8/Mitski_-_Laurel_Hell.png",
+        },
+        {
+            ID: 7,
+            Title: "Turn on the Bright Lights",
+            Artist: "Interpol",
+            Art: "https://upload.wikimedia.org/wikipedia/en/6/68/Interpol_-_Turn_On_The_Bright_Lights.jpg",
+        },
+        {
+            ID: 8,
+            Title: "Arthur Verocai",
+            Artist: "Arthur Verocai",
+            Art: "https://upload.wikimedia.org/wikipedia/en/e/eb/Arthur_Verocai_%28album%29.jpg",
+        },
     ]);
 
     useEffect(() => {
@@ -41,15 +65,17 @@ function Display() {
 
     return (
         <div>
-            Display
-            {albumList.map((al) => (
-                <DisAlbum
-                    key={al.ID}
-                    title={al.Title}
-                    artist={al.Artist}
-                    art={al.Art}
-                />
-            ))}
+            Display(Collection Name)
+            <div className="flex flex-row flex-wrap">
+                {albumList.map((al) => (
+                    <DisAlbum
+                        key={al.ID}
+                        title={al.Title}
+                        artist={al.Artist}
+                        art={al.Art}
+                    />
+                ))}
+            </div>
         </div>
     );
 }
