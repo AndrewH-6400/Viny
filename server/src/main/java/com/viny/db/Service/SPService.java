@@ -1,5 +1,6 @@
 package com.viny.db.Service;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.viny.db.Repositories.CustomSPRepository;
@@ -12,7 +13,7 @@ public class SPService {
         this.customSPRepository = customSPRepository;
     }
     
-    public String album(String searchterm){
+    public ResponseEntity<String> album(String searchterm){
         return customSPRepository.searchSPAlbum(searchterm);
     }
 }

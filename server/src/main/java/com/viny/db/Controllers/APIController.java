@@ -1,5 +1,6 @@
 package com.viny.db.Controllers;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +22,7 @@ public class APIController {
     }
 
     @GetMapping("/al")
-    public String albumSearch(){
+    public ResponseEntity<String> albumSearch(){
         return spService.album("Crawler");
     }
 }
