@@ -6,5 +6,5 @@ import com.viny.db.Models.MyCollection;
 
 @Repository
 public interface CollectionRepository extends JpaRepository<MyCollection, Integer> {
-
+    MyCollection getById(int id);
 }

@@ -13,7 +13,11 @@ public class SPService {
         this.customSPRepository = customSPRepository;
     }
     
-    public ResponseEntity<String> album(String searchterm){
+    public String album(String searchterm){
         return customSPRepository.searchSPAlbum(searchterm);
+    }
+
+    public ResponseEntity<String> albumbID(String id){
+        return customSPRepository.searchSPAlbumID(id);
     }
 }

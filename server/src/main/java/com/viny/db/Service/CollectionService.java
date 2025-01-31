@@ -17,4 +17,13 @@ public class CollectionService {
     public void saveCollection(MyCollection collection){
         collectionRepository.save(collection);
     }
+
+    public MyCollection gCollection(int id){
+        if(collectionRepository.existsById(id)){
+            return collectionRepository.getById(id);
+        }
+        else{
+            return null;
+        }
+    }
 }
