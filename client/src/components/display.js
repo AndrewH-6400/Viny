@@ -2,12 +2,8 @@ import React, { useEffect, useState } from "react";
 import DisAlbum from "./disAlbum";
 
 function Display() {
-    const [album, setAlbum] = useState({
-        ID: 0,
-        Title: "N/A",
-        Artist: "N/A",
-        Art: "N/A",
-    });
+    const [album, setAlbum] = useState();
+    const [albumid, setAlbumID] = useState();
     // const [albumList, setAlbumList] = useState([
     //     {
     //         ID: 1,
@@ -64,13 +60,24 @@ function Display() {
     useEffect(() => {
         fetch("http://localhost:8080/sc/getById?id=1")
             .then((response) => response.json())
-            .then((data) => console.log(data));
+            .then((data) => setAlbumID(data[1]));
     }, []);
+    useEffect(() => {
+        if (albumid !== undefined) {
+            fetch("http://localhost:8080/search/alid?id=" + albumid)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data.images[1].url);
+                    setAlbum(data);
+                });
+        }
+    }, [albumid]);
 
     return (
         <div>
             Display(Collection Name)
             <div className="flex flex-row flex-wrap">
+                {/* mapping will be used later
                 {albumList.map((al) => (
                     <DisAlbum
                         key={al.ID}
@@ -78,7 +85,14 @@ function Display() {
                         artist={al.Artist}
                         art={al.Art}
                     />
-                ))}
+                ))} */}
+                {album !== undefined && (
+                    <DisAlbum
+                        title={album.name}
+                        artist={album.artists[0].name}
+                        art={album.images[1].url}
+                    />
+                )}
             </div>
         </div>
     );

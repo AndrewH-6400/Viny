@@ -9,9 +9,9 @@ function Guide() {
     eventually possibly the type as well (album vs song/nothing)
     */
     useEffect(() => {
-        fetch("http://localhost:8080/search/al")
-            .then((response) => response.json())
-            .then((data) => console.log(data.albums.items));
+        // fetch("http://localhost:8080/search/al")
+        //     .then((response) => response.json())
+        //     .then((data) => console.log(data.albums.items));
     }, []);
 
     return <div>Guide</div>;
