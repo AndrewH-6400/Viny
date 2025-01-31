@@ -9,26 +9,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.viny.db.Service.SPService;
 
-//@CrossOrigin(origins = "/*")
+//Controller for spotify API requests
 @RestController
 @RequestMapping("/search")
 public class APIController {
-    private final SPService spService;
 
+    //inject Spotify Service bean
+    private final SPService spService;
     public APIController(SPService spService){
         this.spService = spService;
     }    
 
+    //search the spotify api for an album
     @GetMapping("/al")
     public ResponseEntity<String> albumSearch(){
+        //Crawler will be replaced with request param
         return ResponseEntity.ok().body(spService.album("Crawler"));
     }
 
+    //searches spotify api using the apotify album id which will be saved to the database
     @GetMapping("/alid")
     public ResponseEntity<String> albumSearchById(
         @RequestParam String id
     ){
-
-        return spService.albumbID(id);
+        return ResponseEntity.ok().body(spService.albumbID(id));
     }
 }

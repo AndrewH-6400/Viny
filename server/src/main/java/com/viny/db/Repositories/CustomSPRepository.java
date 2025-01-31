@@ -18,16 +18,17 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 @Repository
 public class CustomSPRepository {
 
-    private final String AccessToken = "BQAllMSpC98VRGxwqhyCMtFBu0WJNNN03IUhM3jlXx83NKQaw_E6YVuTx-MEr1ipezgKWMTsWegPPuxfRzmfKMUak3XXMgMudaoRnSBa1xqlPzK26LSEX8KVn-f-cCFnm5KolwnfSqE";
+    private final String AccessToken = "BQAlDcMljSKX_uuAu3_UWlpQiLiSxpICAgMgFsMS1k2vFiNHEvAT_wu528R15P7396f6zQZGbdo2l-VEHHsMjjtCXlf5fvM5R2NsgWZJxd5ht226F4Oaj6D6FuDL9rEJI-ERABkegi8";
+    //
     //^^needs to be changed every hour, will need automation eventually//
     
     private final String uri = "https://api.spotify.com/v1/";
+    //example of search
     //https://api.spotify.com/v1/search?q=Crawler&type=album
 
-    //q=Crawler&type=album
     //q is the query and type is self explanitory for mor info ~https://developer.spotify.com/documentation/web-api/reference/search
     
-    //Object[]
+    //receievs response entity but returns only the body of the spotify response to allow for headers to be added later
     public String searchSPAlbum(String name){
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -39,13 +40,13 @@ public class CustomSPRepository {
         return (response.getBody());        
     }
 
-    public ResponseEntity<String> searchSPAlbumID(String id){
+    public String searchSPAlbumID(String id){
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.add("Authorization", "Bearer "+AccessToken);        
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         ResponseEntity<String> response = restTemplate.exchange(uri+"albums/"+id, HttpMethod.GET,entity,String.class);
-        return response;
+        return response.getBody();
     }
 }
