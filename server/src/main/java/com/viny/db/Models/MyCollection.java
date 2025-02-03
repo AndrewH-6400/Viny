@@ -22,6 +22,12 @@ public class MyCollection {
     private int id;
 
     @Column(nullable = false)
+    private int userID;
+
+    @Column(nullable = false)
+    private String collectionName;
+
+    @Column(nullable = false)
     private String[] albums;
 
 }

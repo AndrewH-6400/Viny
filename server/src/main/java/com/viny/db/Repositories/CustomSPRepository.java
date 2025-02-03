@@ -3,22 +3,20 @@ package com.viny.db.Repositories;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Map;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.client.RestClient.ResponseSpec;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
+
 
 
 
 @Repository
 public class CustomSPRepository {
 
-    private final String AccessToken = "BQAlDcMljSKX_uuAu3_UWlpQiLiSxpICAgMgFsMS1k2vFiNHEvAT_wu528R15P7396f6zQZGbdo2l-VEHHsMjjtCXlf5fvM5R2NsgWZJxd5ht226F4Oaj6D6FuDL9rEJI-ERABkegi8";
+    private final String AccessToken = "BQA3O4OWfeyCYOHR2vbor0Wra8mOdubNqc2PFr07rXDQkxUehYCDmt0WxWEWHhuczvAK9KDz73KuDu_wI1lDbFLWxfXkdBa3Bn8ufS4Z2Lb_iO60dQivKIPx06A-s6eJFFocWKI9Tu0";
     //
     //^^needs to be changed every hour, will need automation eventually//
     
@@ -48,5 +46,5 @@ public class CustomSPRepository {
 
         ResponseEntity<String> response = restTemplate.exchange(uri+"albums/"+id, HttpMethod.GET,entity,String.class);
         return response.getBody();
-    }
+    }    
 }

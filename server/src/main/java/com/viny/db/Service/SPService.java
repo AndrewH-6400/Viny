@@ -1,6 +1,5 @@
 package com.viny.db.Service;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.viny.db.Repositories.CustomSPRepository;

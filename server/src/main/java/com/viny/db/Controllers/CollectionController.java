@@ -3,8 +3,11 @@ package com.viny.db.Controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+
 import org.springframework.http.ResponseEntity;
 
+import com.viny.db.Models.MyCollection;
 import com.viny.db.Service.CollectionService;
 
 //Controller for CRUD operations pertaining to Collections
@@ -24,6 +27,14 @@ public class CollectionController {
     ){
         return ResponseEntity.ok(collectionService.gCollection(id).getAlbums());
     }
+
+    //retrieves the master collection of a user which is their "owned"
+    @RequestMapping("/getMByUserId")
+    public ResponseEntity<MyCollection> mCollection(
+        @RequestParam int uId
+    ){
+        return ResponseEntity.ok(collectionService.masterCollection(uId));
+    }    
 
     //retrieves list of collections based on associated user ID
     //searches a users collecction by name @RequestParam = String userID String searchTerm

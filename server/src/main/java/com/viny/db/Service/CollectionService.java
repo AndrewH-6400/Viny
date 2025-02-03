@@ -30,4 +30,10 @@ public class CollectionService {
             return null;
         }
     }
+
+    // return master collection object from userID
+    public MyCollection masterCollection(int userID){
+        return collectionRepository.getByUserID(userID);
+        //return null;
+    }    
 }

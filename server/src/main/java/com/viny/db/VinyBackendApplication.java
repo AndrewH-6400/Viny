@@ -29,6 +29,6 @@ public class VinyBackendApplication implements CommandLineRunner{
 	public void run(String...args) throws Exception{
 		userService.saveUser(new MyUser(0,"Dweeb0","password"));
 		userService.saveUser(new MyUser(0,"D3lilah","password"));	
-		collectionService.saveCollection(new MyCollection(0,new String[] {"3o5EnVZNJXtfPV8tCoagjI","27ygqCfb4dXQ3jyXnC58FU"}));		
+		collectionService.saveCollection(new MyCollection(0,1,"mCollection",new String[] {"3o5EnVZNJXtfPV8tCoagjI","27ygqCfb4dXQ3jyXnC58FU"}));		
 	}
 }

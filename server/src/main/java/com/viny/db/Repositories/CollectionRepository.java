@@ -9,4 +9,7 @@ import com.viny.db.Models.MyCollection;
 public interface CollectionRepository extends JpaRepository<MyCollection, Integer> {
     //getById method (Jpa handles SQL)
     MyCollection getById(int id);
+
+    //@Query("{'userID'}")
+    MyCollection getByUserID(int userID);
 }
