@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.viny.db.Models.MyAlbum;
 import com.viny.db.Service.SPService;
 
 //Controller for spotify API requests
@@ -32,5 +33,13 @@ public class APIController {
         @RequestParam String id
     ){
         return ResponseEntity.ok().body(spService.albumbID(id));
+    }
+
+    //testing spotify processing
+    @GetMapping("/test")
+    public ResponseEntity<MyAlbum> albumObj(
+        @RequestParam String id
+    ){
+        return ResponseEntity.ok().body(spService.albumReturn(id));
     }
 }

@@ -2,6 +2,7 @@ package com.viny.db.Service;
 
 import org.springframework.stereotype.Service;
 
+import com.viny.db.Models.MyAlbum;
 import com.viny.db.Repositories.CustomSPRepository;
 
 //spotify api service
@@ -22,5 +23,10 @@ public class SPService {
     //get by spotify album ID
     public String albumbID(String id){
         return customSPRepository.searchSPAlbumID(id);
+    }
+
+    //testing spotify processing
+    public MyAlbum albumReturn(String id){
+        return customSPRepository.returnAlbumObj(id);
     }
 }
