@@ -16,8 +16,21 @@ public class CollectionService {
     }
 
     //saves collections
-    public void saveCollection(MyCollection collection){
+    public int saveCollection(MyCollection collection){
+        if (collectionRepository.existsById(collection.getId())) {
+            return 1;
+        }
         collectionRepository.save(collection);
+        return 0;
+    }
+
+    //update collection
+    public int updateCollection(MyCollection collection){
+        if (collectionRepository.existsById(collection.getId())) {
+            collectionRepository.save(collection);            
+            return 0;
+        }
+        return 1;
     }
 
     // return MyCollection object after getting by id
