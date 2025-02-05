@@ -1,5 +1,7 @@
 package com.viny.db.Controllers;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,10 +38,17 @@ public class APIController {
     }
 
     //testing spotify processing
-    @GetMapping("/test")
+    @GetMapping("/alobid")
     public ResponseEntity<MyAlbum> albumObj(
         @RequestParam String id
     ){
         return ResponseEntity.ok().body(spService.albumReturn(id));
+    }
+
+    @GetMapping("/umcbuid")
+    public ResponseEntity<List<MyAlbum>> albumList(
+        @RequestParam int uid
+    ){
+        return ResponseEntity.ok().body(spService.albumsByUserId(uid));
     }
 }

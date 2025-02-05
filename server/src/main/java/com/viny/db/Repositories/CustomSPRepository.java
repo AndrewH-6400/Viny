@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -25,7 +26,7 @@ import com.viny.db.Models.MyAlbum;
 @Repository
 public class CustomSPRepository {
 
-    private final String AccessToken = "BQC1Gga0giKHC-UREBCp6qHa5yA_Kd3QH4QBirRNBSk6RS_t-lyE0oq5LGpkn-nfmEMv3Wr_JWacQZ_MdrCuWTKAV3FMOQ81qUVuCDfYHqqSN0Q-YRDRqdkH8cID6AGiUN2iFn9Ky24";
+    private String AccessToken = "BQDp-bALBC2z-YhDLokZzmm4RnrZaO7rm0UkpYJvZ_R-AJRRTZZqXIq0U3Pxq0tK38PV8KFfM4mwuzbzu4M--trHUXWfXFKyOmVawOnFXsontFLJDL0Q6zrnA41qFSxPdFib0zkKFOY";
     //
     //^^needs to be changed every hour, will need automation eventually//
     
@@ -64,17 +65,34 @@ public class CustomSPRepository {
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
         ResponseEntity<String> response = restTemplate.exchange(uri+"albums/"+id, HttpMethod.GET,entity,String.class);
-        //JSONPObject data = new JSONPObject(response.getBody(), JSONPObject.class);
-        //JSONPObject data = new JSONPObject("", response.getBody());
 
+        return processResponse(response);
+    }
+
+    public List<MyAlbum> returnUserAlbums(String[] albums){
+
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer "+AccessToken);        
+        HttpEntity<String> entity = new HttpEntity<>(headers);        
+        List<MyAlbum> albumList = new ArrayList<>();
+        for (String albumId : albums) {
+            ResponseEntity<String> response = restTemplate.exchange(uri+"albums/"+albumId, HttpMethod.GET,entity,String.class);
+            albumList.add(processResponse(response));
+        }
+    
+        return albumList;
+    }
+
+    private MyAlbum processResponse(ResponseEntity<String> response){
         ObjectMapper mapper = new ObjectMapper();
         JsonNode jsonNode;
         try {
             jsonNode = mapper.readTree(response.getBody().toString());
         } catch (JsonMappingException e) {            
-            jsonNode = null;
+            return null;
         } catch (JsonProcessingException e) {            
-            jsonNode = null;
+            return null;
         }
 
         MyAlbum album = new MyAlbum();

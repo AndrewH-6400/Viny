@@ -31,9 +31,9 @@ public class CollectionController {
     //retrieves the master collection of a user which is their "owned"
     @RequestMapping("/getMByUserId")
     public ResponseEntity<MyCollection> mCollection(
-        @RequestParam int uId
+        @RequestParam int uid
     ){
-        return ResponseEntity.ok(collectionService.masterCollection(uId));
+        return ResponseEntity.ok(collectionService.masterCollection(uid));
     }    
 
     //retrieves list of collections based on associated user ID
