@@ -20,12 +20,12 @@ public class SPService {
     }
     
     //search by album name
-    public String album(String searchterm){
+    public MyAlbum album(String searchterm){
         return customSPRepository.searchSPAlbum(searchterm);
     }
 
     //get by spotify album ID
-    public String albumbID(String id){
+    public MyAlbum albumbID(String id){
         return customSPRepository.searchSPAlbumID(id);
     }
 

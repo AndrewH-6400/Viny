@@ -2,26 +2,7 @@ import React, { useEffect, useState } from "react";
 import DisAlbum from "./disAlbum";
 
 function Display() {
-    const [album, setAlbum] = useState();
-    const [albumid, setAlbumID] = useState();
-
     const [albumList, setAlbumList] = useState([]);
-
-    // useEffect(() => {
-    //     fetch("http://localhost:8080/sc/getById?id=1")
-    //         .then((response) => response.json())
-    //         .then((data) => setAlbumID(data[1]));
-    // }, []);
-    // useEffect(() => {
-    //     if (albumid !== undefined) {
-    //         fetch("http://localhost:8080/search/alid?id=" + albumid)
-    //             .then((response) => response.json())
-    //             .then((data) => {
-    //                 console.log(data.images[1].url);
-    //                 setAlbum(data);
-    //             });
-    //     }
-    // }, [albumid]);
 
     useEffect(() => {
         fetch("http://localhost:8080/search/umcbuid?uid=1")
