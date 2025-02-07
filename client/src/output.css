@@ -572,6 +572,11 @@ video {
   margin-right: auto;
 }
 
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -598,6 +603,10 @@ video {
 
 .h-lvh {
   height: 100lvh;
+}
+
+.h-fit {
+  height: fit-content;
 }
 
 .w-20 {
@@ -737,4 +746,9 @@ video {
 .text-slate-200 {
   --tw-text-opacity: 1;
   color: rgb(226 232 240 / var(--tw-text-opacity, 1));
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }

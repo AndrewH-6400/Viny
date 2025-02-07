@@ -9,8 +9,12 @@ function Navbar() {
                 <span className="italic text-3xl align-middle">Viny</span>
             </div>
             <div className="justify-end flex flex-row w-full">
-                <p className="mx-2">login</p>
-                <p className="mx-2">sign up</p>
+                <a className="mx-2" href="/login">
+                    login
+                </a>
+                <a className="mx-2" href="/register">
+                    sign up
+                </a>
             </div>
         </div>
     );
