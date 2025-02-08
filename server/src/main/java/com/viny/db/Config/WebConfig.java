@@ -15,8 +15,7 @@ public class WebConfig implements WebMvcConfigurer{
         //the whole thing breaks if the .addMapping is changed
         registry.addMapping("/**")
         .allowedOrigins("http://localhost:3000")
-        .allowedMethods("GET","PUT","DELETE","UPDATE")
-        .allowedHeaders("Access-Control-Allow-Origin")        
+        .allowedMethods("GET","PUT","DELETE","UPDATE","POST")        
         .allowCredentials(false).maxAge(3600);        
     }
     

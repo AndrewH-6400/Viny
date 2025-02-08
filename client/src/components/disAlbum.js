@@ -1,7 +1,6 @@
 import React from "react";
 
 function DisAlbum(props) {
-    console.log("DISALBUM");
     return (
         <div className="my-4 basis-1/6">
             <span>
