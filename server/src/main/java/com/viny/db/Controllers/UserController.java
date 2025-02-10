@@ -26,6 +26,7 @@ public class UserController {
     public ResponseEntity<String> saveUser(
         @RequestBody MyUser user
     ){
+        System.out.println(user);
         if(userService.saveUser(user) ==1 ){
             return ResponseEntity.badRequest().body("Invalid user Id");
         }

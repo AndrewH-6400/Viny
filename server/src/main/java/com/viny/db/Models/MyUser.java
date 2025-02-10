@@ -20,14 +20,27 @@ public class MyUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(nullable = true, unique = false)
+    private String f_name;
+    @Column(nullable = true, unique = false)
+    private String l_name;
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
     //make sure they make a username and that it is unique
     @Column(nullable = false, unique = true)
     private String username;
 
+    //this will eventually be encrypted once the security is implemented
     @Column(nullable = false, length = 64)
     private String password;
     
-    public MyUser(String username, String password){
+    //since the id is auto generated we can use a constructor that doesn't require it
+    public MyUser(String f_name, String l_name, String email, String username, String password){
+        this.f_name = f_name;
+        this.l_name = l_name;
+        this.email = email;
         this.username = username;
         this.password = password;
     }
