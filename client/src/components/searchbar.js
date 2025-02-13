@@ -27,10 +27,11 @@ function Searchbar() {
                 />
             </form>
             {results !== undefined && (
-                <div className="bg-white absolute w-48 h-fit">
+                <div className="bg-white absolute w-fit h-fit">
                     {results.map((al) => (
                         <SearchResult
                             key={al.id}
+                            id={al.id}
                             title={al.title}
                             artist={al.artistName}
                             art={al.images[1]}
