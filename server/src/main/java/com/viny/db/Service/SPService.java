@@ -20,7 +20,7 @@ public class SPService {
     }
     
     //search by album name
-    public MyAlbum album(String searchterm){
+    public List<MyAlbum> album(String searchterm){
         return customSPRepository.searchSPAlbum(searchterm);
     }
 

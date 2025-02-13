@@ -4,7 +4,7 @@ function Searchbar() {
     const [search, setSearch] = useState("");
 
     useEffect(() => {
-        if (search != undefined && search != "") {
+        if (search !== undefined && search !== "") {
             fetch("http://localhost:8080/search/al?search=" + search)
                 .then((response) => response.json())
                 .then((data) => console.log(data));

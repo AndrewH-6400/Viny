@@ -24,10 +24,10 @@ public class APIController {
 
     //search the spotify api for an album
     @GetMapping("/al")
-    public ResponseEntity<MyAlbum> albumSearch(
+    public ResponseEntity<List<MyAlbum>> albumSearch(
         @RequestParam String search
     ){        
-        return ResponseEntity.ok().body(spService.album("Crawler"));
+        return ResponseEntity.ok().body(spService.album(search));
     }
 
     //searches spotify api using the apotify album id which will be saved to the database
