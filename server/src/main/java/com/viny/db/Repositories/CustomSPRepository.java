@@ -145,10 +145,21 @@ public class CustomSPRepository {
 
         return album;
     }
+    
 
     //Searches spotify for an album by name
     public MyAlbum searchSPAlbum(String name){
         //searching by name and type (album) limit and offset will be modified to allow displaying and showing larger amounts of information
+        //https://api.spotify.com/v1/
+        //https://api.spotify.com/v1/search?q=Crawler Idles&type=album
+        
+        /*
+         * this has a known error the format of the response is different from spotify
+         * spotify has the information encased more so i either need a new prcess method that is designed for the new response format
+         * or I need a new process method that takes something like a jsonNode and goes from there
+         * which means I would need to send it the right node and it still may be different
+         * or a way for the current method to try and adjust if it can't find the answer the first time
+         */
         ResponseEntity<String> response = makeCallToSpotify(uri+"search?q="+name+"&type=album&limit=2", HttpMethod.GET);
         
         //return our response as a MyAlbum obj
@@ -157,7 +168,7 @@ public class CustomSPRepository {
 
     //take album id and return the response from spotify
     public MyAlbum searchSPAlbumID(String id){                
-
+        
         ResponseEntity<String> response = makeCallToSpotify(uri+"albums/"+id, HttpMethod.GET);
         //return our response as a MyAlbum obj
         return (processResponse(response));  

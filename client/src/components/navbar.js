@@ -1,5 +1,6 @@
 import React from "react";
 import icon from "../images/favicon-32x32.png";
+import Searchbar from "./searchbar";
 
 function Navbar() {
     return (
@@ -8,12 +9,15 @@ function Navbar() {
                 <img src={icon} alt="icon" className="inline mx-2" />
                 <span className="italic text-3xl align-middle">Viny</span>
             </div>
-            <div className="justify-end flex flex-row w-full">
+
+            <Searchbar />
+
+            <div className="justify-end flex flex-row">
                 <a className="mx-2" href="/login">
-                    login
+                    Login
                 </a>
                 <a className="mx-2" href="/register">
-                    sign up
+                    Register
                 </a>
             </div>
         </div>

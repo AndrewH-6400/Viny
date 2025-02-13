@@ -3,7 +3,6 @@ import "./home.css";
 import Navbar from "../components/navbar";
 import Guide from "../components/guide";
 import Display from "../components/display";
-import Settings from "../components/settings";
 
 function Home() {
     return (
@@ -14,11 +13,8 @@ function Home() {
                     <div className="bg-indigo-900 p-1 h-full basis-1/4 overflow-auto rounded-md">
                         <Guide />
                     </div>
-                    <div className="bg-indigo-900 mx-2 p-1 h-full basis-1/2 overflow-auto rounded-md">
+                    <div className="bg-indigo-900 mx-2 p-1 h-full basis-3/4 overflow-auto rounded-md">
                         <Display />
-                    </div>
-                    <div className="bg-indigo-900 p-1 h-full basis-1/4 overflow-auto rounded-md">
-                        <Settings />
                     </div>
                 </div>
             </div>

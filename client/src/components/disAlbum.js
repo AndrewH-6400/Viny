@@ -2,7 +2,7 @@ import React from "react";
 
 function DisAlbum(props) {
     return (
-        <div className="my-4 basis-1/6">
+        <div className="my-4 px-4 basis-1/8">
             <span>
                 <img
                     src={props.art}

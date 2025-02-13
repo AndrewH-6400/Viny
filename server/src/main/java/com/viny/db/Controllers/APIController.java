@@ -24,8 +24,9 @@ public class APIController {
 
     //search the spotify api for an album
     @GetMapping("/al")
-    public ResponseEntity<MyAlbum> albumSearch(){
-        //Crawler will be replaced with request param
+    public ResponseEntity<MyAlbum> albumSearch(
+        @RequestParam String search
+    ){        
         return ResponseEntity.ok().body(spService.album("Crawler"));
     }
 

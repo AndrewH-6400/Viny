@@ -14,7 +14,12 @@ function Guide() {
         //     .then((data) => console.log(data.albums.items));
     }, []);
 
-    return <div>Guide</div>;
+    return (
+        <div>
+            <div>Guide</div>
+            <div>{/*>Collections</a> */}</div>
+        </div>
+    );
 }
 
 export default Guide;
