@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 
 import com.viny.db.Models.MyCollection;
@@ -59,6 +63,29 @@ public class CollectionController {
             return ResponseEntity.badRequest().body("Invalid Collection id");
         }
         return ResponseEntity.ok().body("Collection updated successfully"+getCollection(collection.getId()));
+    }
+
+    //add an album to master collection
+    @PostMapping("/addToMCollection")
+    public ResponseEntity<String> addToMasterCollection(
+        @RequestParam String aId,
+        @RequestParam int uId
+    ){
+
+        
+        //String [] albums = collectionService.masterCollection(uId).getAlbums();
+        List<String> albums = new ArrayList<>();
+        MyCollection collection = collectionService.masterCollection(uId);
+        for (String al : collection.getAlbums()) {
+            albums.add(al);
+        }
+        albums.add(aId);
+        collection.setAlbums(albums.toArray(String[]::new));        
+        if (collectionService.updateCollection(collection) == 0) {
+            return ResponseEntity.ok().body("Successful save: "+collectionService.masterCollection(uId));
+        };        
+
+        return ResponseEntity.badRequest().body("Server Error invalid information");
     }
 
     //deletes a collection @RP id userID and name (to make sure the right collection is about to be deleted)
