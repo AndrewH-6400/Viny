@@ -1,15 +1,22 @@
 import React from "react";
 
 function SearchResult(props) {
-    const handleClick = (e) => {
+    //sends the album to be added to the users master library
+    //more a proof of concept then a final implementation
+    const handleClick = () => {
         fetch(
             "http://localhost:8080/sc/addToMCollection?uId=1&aId=" + props.id,
             {
                 method: "POST",
             }
-        ).then((response) => console.log(response));
+        ).then((response) => {
+            window.location.reload(false);
+            console.log(response);
+        });
+        //
     };
     return (
+        //draws album and button
         <div className="text-black flex flex-row">
             <span>
                 <img

@@ -72,8 +72,7 @@ public class CollectionController {
         @RequestParam int uId
     ){
 
-        
-        //String [] albums = collectionService.masterCollection(uId).getAlbums();
+        //work to make sure I have the properly formatted data to be saved to the database                
         List<String> albums = new ArrayList<>();
         MyCollection collection = collectionService.masterCollection(uId);
         for (String al : collection.getAlbums()) {
