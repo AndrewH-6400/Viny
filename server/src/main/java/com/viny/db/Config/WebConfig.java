@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
+//this is in place for now to handle CORS until that can be handled by Spring security
 public class WebConfig implements WebMvcConfigurer{
     //allows the server to communicate with machines on the localnetwork
     //will be replaced when later security is addeed
