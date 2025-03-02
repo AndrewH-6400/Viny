@@ -5,7 +5,14 @@ function Display() {
     const [albumList, setAlbumList] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:8080/search/umcbuid?uid=1")
+        fetch("http://localhost:8080/search/umcbuid?uid=1", {
+            method: "GET",
+            headers: {
+                authorization: "",
+                "Content-type": "application/json",
+                accept: "",
+            },
+        })
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);

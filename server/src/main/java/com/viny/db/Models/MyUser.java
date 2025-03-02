@@ -35,14 +35,20 @@ public class MyUser {
     //this will eventually be encrypted once the security is implemented
     @Column(nullable = false, length = 64)
     private String password;
+
+    //necessary for the spring security
+    @Column(nullable = false, length = 64)
+    private String role;
     
     //since the id is auto generated we can use a constructor that doesn't require it
+    //any unspecified role will be a user
     public MyUser(String f_name, String l_name, String email, String username, String password){
         this.f_name = f_name;
         this.l_name = l_name;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.role = "USER";
     }
     
 }

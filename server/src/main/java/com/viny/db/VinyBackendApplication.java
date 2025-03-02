@@ -2,6 +2,7 @@ package com.viny.db;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
 import com.viny.db.Models.MyCollection;
 import com.viny.db.Models.MyUser;
@@ -10,11 +11,13 @@ import com.viny.db.Service.UserService;
 
 import org.springframework.boot.CommandLineRunner;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class VinyBackendApplication implements CommandLineRunner{
 
 	private final UserService userService;
 	private final CollectionService collectionService;
+
+	
 
 	public VinyBackendApplication(UserService userService, CollectionService collectionService){
 		this.userService = userService;
