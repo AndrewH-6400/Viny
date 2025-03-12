@@ -1,71 +1,97 @@
-// package com.viny.db.Config;
+package com.viny.db.Config;
 
-// import org.springframework.context.annotation.Bean;
-// import org.springframework.context.annotation.Configuration;
-// import org.springframework.security.authentication.AuthenticationProvider;
-// import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-// import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-// import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-// import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-// import org.springframework.security.core.userdetails.UserDetailsService;
-// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-// import org.springframework.security.web.SecurityFilterChain;
+import java.util.Arrays;
 
-// @Configuration
-// @EnableWebSecurity
-// public class SecurityConfig {
-    
-//     private final UserDetailsService userDetailsService;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-//     public SecurityConfig(UserDetailsService userDetailsService){
-//         this.userDetailsService = userDetailsService;
-//     }
 
-//     @Bean
-//     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+ 
+
+    //importing and using UserDetailsService works in place of MyUserDetailService
+    //same thing that is implemented within MyUserDetailsService
+    //dependency inversion
+    private final UserDetailsService userDetailService;
+
+    public SecurityConfig(UserDetailsService userDetailService){
+        this.userDetailService = userDetailService;
+    }
+
+
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        http
+            .authorizeHttpRequests((authorize) -> authorize
+                .requestMatchers("/**").permitAll()                                
+                .anyRequest().authenticated()                                  
+            )
+            //temp as csrf disabling exposes vulnerabilities, but right now it is blocking post requests
+            .csrf(csrf -> csrf.disable())            
+            ;                     
         
-//         http.authorizeHttpRequests((authorize) -> authorize
-//             .requestMatchers("/**").permitAll()
-//             .anyRequest().authenticated()
-//         )
-//         //where to find the custom login
-//         .formLogin(customLogin -> {
-//             customLogin.loginPage("/login")
-//                 .defaultSuccessUrl("/")
-//                 .permitAll();
-//         })
-//             .logout(l -> l
-//                 .logoutUrl("/logout")                
-//                 .permitAll());
+        return http.build();
+    }
 
-//         return http.build();
-//     }
 
-//     //custom registry
-//     @Bean
-//     public AuthenticationProvider authenticationProvider(){
-//         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    //exceptions to the security
+    @Bean
+    public WebSecurityCustomizer ignoreResources(){
+        return(webSecurity) -> webSecurity
+                .ignoring()
+                .requestMatchers("/h2-console/**");
 
-//         //1) user detail service
-//         provider.setUserDetailsService(userDetailsService);
+    }
+    
 
-//         //2) password encoder
-//         provider.setPasswordEncoder(passwordEncoder());
+    //custom authentication manager to not pull from system memory
+    @Bean
+    public AuthenticationManager authenticationManager() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 
-//         return provider;
-//     }
+        //set the user details service
+        provider.setUserDetailsService(userDetailService);
 
-//     // password encoding
-//     @Bean
-//     public BCryptPasswordEncoder passwordEncoder(){        
-//         return new BCryptPasswordEncoder();
-//     }
+        //set password encoder to the encoder method
+        provider.setPasswordEncoder(encoder());
 
-//     // exceptions
-//     @Bean
-//     public WebSecurityCustomizer ignoreResources(){
-//         return(webSecurity) -> webSecurity
-//                 .ignoring()
-//                 .requestMatchers("/css/**","/h2-console/**");
-//     }
-// }
+        return new ProviderManager(provider);
+    }
+    @Bean
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    // @Bean
+    // public UserDetailsService userDetailsService() {
+    //     //this will need editing to change default password encoder as it is unsafe
+    //     UserDetails userDetails = User.withDefaultPasswordEncoder()
+    //         .username("user")
+    //         .password("password")
+    //         .roles("USER")
+    //         .build();
+
+    //         return new InMemoryUserDetailsManager(userDetails);
+    // }
+
+}
