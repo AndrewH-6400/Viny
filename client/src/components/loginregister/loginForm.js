@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import bcrypt from "bcryptjs";
 
 function LoginForm() {
     const [formData, setFormData] = useState({});
@@ -11,11 +12,11 @@ function LoginForm() {
         //format the data
         const data = {
             username: formData.username,
-            password: formData.password,
+            password: bcrypt.hashSync(formData.password),
         };
         //issue where cors does not allow changing the content type to application/json
         console.log(data);
-        fetch("http://localhost:8080/login", {
+        fetch("http://localhost:8080/auth/login", {
             method: "POST",
             headers: {
                 "content-type": "application/json",

@@ -47,8 +47,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()                                  
             )
             //temp as csrf disabling exposes vulnerabilities, but right now it is blocking post requests
-            .csrf(csrf -> csrf.disable())            
-            ;                     
+            .csrf(csrf -> csrf.disable());                     
         
         return http.build();
     }
@@ -77,6 +76,7 @@ public class SecurityConfig {
 
         return new ProviderManager(provider);
     }
+
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();

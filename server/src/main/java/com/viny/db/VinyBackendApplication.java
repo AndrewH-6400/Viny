@@ -27,11 +27,14 @@ public class VinyBackendApplication implements CommandLineRunner{
 	public static void main(String[] args) {
 		SpringApplication.run(VinyBackendApplication.class, args);
 	}
-
+	
+	//
 	@Override
 	public void run(String...args) throws Exception{
-		userService.saveUser(new MyUser("Andrew", "H","andrewh@email.com","Dweeb0","password"));
-		userService.saveUser(new MyUser("Delilah","D","delTh3D0g@k9.com","D3lilah","password"));	
+		//password for Dweeb0 is password
+		//password for D3lilah is 123
+		userService.saveUser(new MyUser("Andrew", "H","andrewh@email.com","Dweeb0","$2b$10$Tn8vcWeLLZ0hVcRt3GvQluIj0odKz3ShU3IaC0w730WyJLnne/XYG"));
+		userService.saveUser(new MyUser("Delilah","D","delTh3D0g@k9.com","D3lilah","$2b$10$7ilZzgfBWsDNr8aeILSUIOszaJUJ796c6cgZ4CZ1hcFEykkDk6mDS"));	
 		collectionService.saveCollection(new MyCollection(0,1,"mCollection",new String[] {"3o5EnVZNJXtfPV8tCoagjI","27ygqCfb4dXQ3jyXnC58FU"}));		
 	}
 }
