@@ -12,6 +12,7 @@ function LoginForm() {
         //format the data
         const data = {
             username: formData.username,
+            //hash the data before sending for storage
             password: bcrypt.hashSync(formData.password),
         };
         //issue where cors does not allow changing the content type to application/json
