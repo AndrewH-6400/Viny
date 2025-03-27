@@ -30,6 +30,10 @@ public class UserService {
         }
         return null;
     }
+    //get user by username
+    public MyUser getUserByUsername(String username){
+        return userRepository.getByUsername(username).get();
+    }
 
     //update user
     public int updateUser(MyUser user){

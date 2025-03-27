@@ -45,8 +45,17 @@ public class UserController {
         }
     }
     //Retrieve user by username
+    @GetMapping("/getByUsername")
+    public ResponseEntity<MyUser> getUserByUN(
+        @RequestParam String username
+    ){
+        //for now this is only called after someone has logged in and so we know for sure they exist.
+        //the information from the repo is optional but is converted in the service level
+        return ResponseEntity.ok().body(userService.getUserByUsername(username));
+    }
+
     //Update user
-    @PostMapping("updateUser")
+    @PostMapping("/updateUser")
     public ResponseEntity<String> updateUser(
         @RequestBody MyUser user
     ){

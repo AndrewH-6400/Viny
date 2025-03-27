@@ -37,6 +37,7 @@ public class MyUser {
     private String password;
 
     //necessary for the spring security
+    //this may be replaced as string security's SecurityContext has roles there as well
     @Column(nullable = false, length = 64)
     private String role;
     

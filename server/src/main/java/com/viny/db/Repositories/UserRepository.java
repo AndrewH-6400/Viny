@@ -14,4 +14,6 @@ public interface UserRepository extends JpaRepository<MyUser, Integer>{
 
     //get optional user by username
     public Optional<MyUser> getByUsername(String username);
+
+    
 }

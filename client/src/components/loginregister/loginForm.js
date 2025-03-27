@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import bcrypt from "bcryptjs";
 
 function LoginForm() {
@@ -23,7 +23,31 @@ function LoginForm() {
                 "content-type": "application/json",
             },
             body: JSON.stringify(formData),
-        }).then((result) => console.log(result));
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                //debug to show the username of the login
+                getUserInfo(data.authentication.name);
+            });
+    };
+
+    //this will be to alert the user they have logged in and their info has been retrieved
+    const getUserInfo = (e) => {
+        if (e !== "") {
+            fetch("http://localhost:8080/getByUsername?username=" + e, {
+                method: "GET",
+                headers: {
+                    authorization: "",
+                    "Content-type": "application/json",
+                    accept: "",
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    alert("Welcome " + data.f_name + "!");
+                });
+        }
     };
 
     //handles the change for each form value
